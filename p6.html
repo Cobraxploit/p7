@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Calculator</title>
+<style>
+body{font-family:Arial;text-align:center;background:#eef;}
+div{background:white;padding:20px;width:250px;margin:auto;border-radius:10px;}
+input,select,button{width:100%;margin:5px;padding:5px;font-size:15px;}
+button{background:blue;color:white;}
+</style>
+</head>
+
+<body>
+<div>
+<h2>Calculator</h2>
+
+<input type="number" id="n1" placeholder="First number">
+<input type="number" id="n2" placeholder="Second number">
+
+<select id="op">
+<option value="+">Sum</option>
+<option value="-">Difference</option>
+<option value="*">Product</option>
+<option value="/">Quotient</option>
+<option value="%">Remainder</option>
+<option value="pow">Power</option>
+<option value="sqrt">Square Root</option>
+<option value="sq">Square</option>
+</select>
+
+<button onclick="calc()">Calculate</button>
+
+<p id="res"></p>
+</div>
+
+<script>
+function calc(){
+var a=parseFloat(n1.value);
+var b=parseFloat(n2.value);
+var op=op=document.getElementById("op").value;
+var r;
+
+switch(op){
+case "+": r=a+b; break;
+case "-": r=a-b; break;
+case "*": r=a*b; break;
+case "/": r=a/b; break;
+case "%": r=a%b; break;
+case "pow": r=Math.pow(a,b); break;
+case "sqrt": r="√"+a+" = "+Math.sqrt(a); break;
+case "sq": r="Square: "+(a*a)+", "+(b*b); break;
+}
+document.getElementById("res").innerHTML="Result : "+r;
+}
+</script>
+
+</body>
+</html>
