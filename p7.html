@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON & Hash Program</title>
+<style>
+body{font-family:Arial;text-align:center;background:#eef;}
+textarea,input{width:80%;margin:5px;padding:5px;}
+button{padding:5px 10px;background:blue;color:white;}
+pre{background:#fff;padding:10px;}
+</style>
+</head>
+<body>
+
+<h2>JSON & Hash Converter</h2>
+
+<!-- a) JSON → Object -->
+<textarea id="json"></textarea><br>
+<button onclick="jsonToObj()">JSON to Object</button>
+<pre id="obj"></pre>
+
+<!-- b) JSON → Date -->
+<textarea id="jsonDate"></textarea><br>
+<button onclick="jsonToDate()">JSON to Date</button>
+<pre id="date"></pre>
+
+<!-- c) JSON ↔ CSV -->
+<textarea id="jsonCsv"></textarea><br>
+<button onclick="jsonToCsv()">JSON to CSV</button>
+<pre id="csv"></pre>
+
+<textarea id="csvJson"></textarea><br>
+<button onclick="csvToJson()">CSV to JSON</button>
+<pre id="jsonOut"></pre>
+
+<!-- d) Hash -->
+<input type="text" id="hashTxt" placeholder="Enter text"><br>
+<button onclick="makeHash()">Create Hash</button>
+<pre id="hash"></pre>
+
+<script>
+/* a) JSON to JS Object */
+function jsonToObj(){
+let o = JSON.parse(json.value);
+obj.innerText = typeof o + " : " + JSON.stringify(o);
+}
+
+/* b) JSON result to Date */
+function jsonToDate(){
+let o = JSON.parse(jsonDate.value);
+let d = new Date(o.date);
+date.innerText = d;
+}
+
+/* c) JSON to CSV */
+function jsonToCsv(){
+let a = JSON.parse(jsonCsv.value);
+let keys = Object.keys(a[0]);
+let csv = keys.join(",")+"\n";
+a.forEach(x=>{
+csv += keys.map(k=>x[k]).join(",")+"\n";
+});
+document.getElementById("csv").innerText = csv;
+}
+
+/* CSV to JSON */
+function csvToJson(){
+let lines = csvJson.value.split("\n");
+let keys = lines[0].split(",");
+let res=[];
+for(let i=1;i<lines.length;i++){
+let obj={};
+let val = lines[i].split(",");
+keys.forEach((k,j)=>obj[k]=val[j]);
+res.push(obj);
+}
+jsonOut.innerText = JSON.stringify(res);
+}
+
+/* d) Hash creation (Browser way) */
+function makeHash(){
+let s = hashTxt.value;
+let h = btoa(s);   // simple hash-like encoding
+hash.innerText = h;
+}
+</script>
+
+</body>
+</html>
